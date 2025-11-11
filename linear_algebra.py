@@ -9,6 +9,19 @@ def l2_norm(v):
 def inf_norm(v):
     # return max absolute value
     return max(abs(n) for n in v)
-print(l1_norm([3, -4, 2]))   # 9
-print(l2_norm([3, 4]))       # 5
-print(inf_norm([3, -4, 2]))  # 4
+
+def norm(v):
+    """Day 2 of implementing vector norm Eucledian norm"""
+    return math.sqrt(sum(abs(x)*abs(x) for x in v))
+
+
+
+if __name__== "__main__":
+    #DAy 1
+    #creating l1 ,l2 ,inf_normobjects to verify
+    # print(l1_norm([3, -4, 2]))   # 9
+    # print(l2_norm([3, 4]))       # 5
+    # print(inf_norm([3, -4, 2]))  # 4
+    print(norm([3,4]))  # should print 5
+
+    
