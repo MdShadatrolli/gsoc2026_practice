@@ -23,7 +23,32 @@ def cosine(a, b):
     y=math.sqrt(sum(i*i for i in b))
     final=dotprdct/(x*y)
     return final
-    
+
+
+def matmul(A, B):
+    """Matrix multiplication for 2D lists"""
+    # Number of rows in A and columns in B
+    rows_A = len(A)
+    cols_A = len(A[0])
+    rows_B = len(B)
+    cols_B = len(B[0])
+
+    # Check if multiplication is possible
+    if cols_A != rows_B:
+        raise ValueError("Matrix dimensions do not match for multiplication")
+
+    # Initialize result matrix with zeros
+    result = [[0 for _ in range(cols_B)] for _ in range(rows_A)]
+
+    # Perform multiplication
+    for i in range(rows_A):
+        for j in range(cols_B):
+            for k in range(cols_A):
+                result[i][j] += A[i][k] * B[k][j]
+
+    return result
+
+
 
     
         
@@ -48,6 +73,16 @@ if __name__== "__main__":
 
     #Cosine similarity
     print(cosine([2,3,1],[1,0,-1]))
+
+    #Matrix Multiplication
+    A = [[1,2],
+     [3,4]]
+
+    B = [[2,0],
+        [1,2]]
+
+    print(matmul(A, B))  # expected: [[4,4],[10,8]]
+
 
 
 
