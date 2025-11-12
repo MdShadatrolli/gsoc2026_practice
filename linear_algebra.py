@@ -48,6 +48,17 @@ def matmul(A, B):
 
     return result
 
+def vector_projection(a, b):
+    """Project vector a onto vector b"""
+    # dot product
+    dot = sum(a1 * b1 for a1, b1 in zip(a, b))
+    # magnitude of b squared
+    mag_b2 = sum(b1 ** 2 for b1 in b)
+    # scalar multiplier
+    scalar = dot / mag_b2
+    # projection vector
+    proj = [scalar * b1 for b1 in b]
+    return proj
 
 
     
@@ -82,6 +93,9 @@ if __name__== "__main__":
         [1,2]]
 
     print(matmul(A, B))  # expected: [[4,4],[10,8]]
+    a = [2, 3]
+    b = [1, 0]
+    print("Projection of a on b:", vector_projection(a, b))
 
 
 
