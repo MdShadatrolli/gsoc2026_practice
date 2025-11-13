@@ -111,6 +111,24 @@ def identity(n):
     """Return an identity matrix of size n×n."""
     return [[1 if i == j else 0 for j in range(n)] for i in range(n)]
 
+def determinant_2x2(M):
+    """Return determinant of a 2x2 matrix."""
+    if len(M) == 2 and len(M[0]) == 2:
+        return M[0][0]*M[1][1] - M[0][1]*M[1][0]
+    else:
+        raise ValueError("Only 2x2 matrices are supported in this function.")
+
+
+def inverse_2x2(M):
+    """Return inverse of a 2x2 matrix."""
+    det = determinant_2x2(M)
+    if det == 0:
+        raise ValueError("Matrix is singular, no inverse exists.")
+    
+    a, b = M[0]
+    c, d = M[1]
+    return [[d/det, -b/det],
+            [-c/det, a/det]]
 
 
 
@@ -186,3 +204,22 @@ if __name__== "__main__":
     print("A × I =", matmul(A, I))
     print("I × A =", matmul(I, A))
     print("Transpose of A =", transpose(A))
+    A = [[4, 6],
+     [3, 8]]
+
+    print("Determinant:", determinant_2x2(A))  # Expected 14
+
+
+
+    A = [[4, 6],
+        [3, 8]]
+
+    invA = inverse_2x2(A)
+    print("Inverse of A:")
+    for row in invA:
+        print(row)
+
+    # Verify A * A^-1 = I
+    print("Verification (A × A^-1):")
+    for row in matmul(A, invA):
+        print([round(x, 2) for x in row])
