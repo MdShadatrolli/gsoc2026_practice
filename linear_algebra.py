@@ -130,6 +130,30 @@ def inverse_2x2(M):
     return [[d/det, -b/det],
             [-c/det, a/det]]
 
+def eigen_2x2(M):
+    """Compute eigenvalues and eigenvectors of a 2x2 matrix."""
+    a, b = M[0]
+    c, d = M[1]
+
+    # Characteristic equation: |A - λI| = 0 -> (a-λ)(d-λ) - bc = 0
+    # λ^2 - (a+d)λ + (ad - bc) = 0
+    trace = a + d
+    determinant = a*d - b*c
+
+    # Quadratic formula
+    discriminant = math.sqrt(trace**2 - 4*determinant)
+    λ1 = (trace + discriminant) / 2
+    λ2 = (trace - discriminant) / 2
+
+    return λ1, λ2
+
+
+def eigenvector_2x2(M, λ):
+    """Find eigenvector for given λ."""
+    a, b = M[0]
+    c, d = M[1]
+    # Solve (A - λI)v = 0
+    return [b, λ - a]  # Simplified for 2x2 symmetric case
 
 
 if __name__== "__main__":
@@ -223,3 +247,13 @@ if __name__== "__main__":
     print("Verification (A × A^-1):")
     for row in matmul(A, invA):
         print([round(x, 2) for x in row])
+
+
+    A = [[2, 1],
+        [1, 2]]
+
+    λ1, λ2 = eigen_2x2(A)
+    print("Eigenvalues:", λ1, λ2)
+
+    print("Eigenvector for λ1:", eigenvector_2x2(A, λ1))
+    print("Eigenvector for λ2:", eigenvector_2x2(A, λ2))
