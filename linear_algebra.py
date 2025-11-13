@@ -60,7 +60,20 @@ def vector_projection(a, b):
     proj = [scalar * b1 for b1 in b]
     return proj
 
+def dot(a, b):
+    return sum(x * y for x, y in zip(a, b))
 
+
+def are_orthogonal(a, b, eps=1e-9):
+    """
+    Return True if vectors a and b are orthogonal (within numerical tolerance eps).
+    - a, b: iterables of same length (extra elements past shortest are ignored).
+    - eps: tolerance for floating point comparison.
+    """
+    if len(a) != len(b):
+        raise ValueError("Vectors must have the same length to compute orthogonality.")
+    d = dot(a, b)
+    return abs(d) < eps
     
         
 
@@ -98,6 +111,17 @@ if __name__== "__main__":
     print("Projection of a on b:", vector_projection(a, b))
 
 
+    a = [1.0, 2.0]
+    b = [-2.0, 1.0]
+    print("dot:", dot(a, b))                       # 0.0
+    print("norm a:", norm(a))                     # sqrt(5)
+    print("orthogonal?", are_orthogonal(a, b))    # True
+
+    # a float example where dot is near zero
+    a2 = [1e-10, 1.0]
+    b2 = [0.0, 1.0]
+    print("dot (near-zero):", dot(a2, b2))        # ~1.0
+    print("orthogonal (tolerance):", are_orthogonal([1e-10, 1.0], [0.0, 1.0], eps=1e-9))
 
 
     
