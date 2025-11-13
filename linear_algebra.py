@@ -75,9 +75,41 @@ def are_orthogonal(a, b, eps=1e-9):
     d = dot(a, b)
     return abs(d) < eps
     
+def scalar_multiply(v, s):
+    return [x * s for x in v]
+
+def vector_sub(a, b):
+    return [x - y for x, y in zip(a, b)]
+
+def gram_schmidt(vectors):
+    """Perform Gram-Schmidt orthonormalization on a list of vectors."""
+    orthonormal = []
+    
+    for v in vectors:
+        # Start with current vector
+        u = v[:]
+        for e in orthonormal:
+            # Subtract projection on each previous orthonormal vector
+            proj_coeff = dot(v, e)
+            u = vector_sub(u, scalar_multiply(e, proj_coeff))
         
+        # Normalize
+        u_norm = norm(u)
+        if u_norm == 0:
+            raise ValueError("Vectors are linearly dependent")
+        e = [x / u_norm for x in u]
+        orthonormal.append(e)
+    
+    return orthonormal
+      
+def transpose(M):
+    """Return the transpose of matrix M."""
+    return [[M[j][i] for j in range(len(M))] for i in range(len(M[0]))]
 
     
+def identity(n):
+    """Return an identity matrix of size n×n."""
+    return [[1 if i == j else 0 for j in range(n)] for i in range(n)]
 
 
 
@@ -125,3 +157,32 @@ if __name__== "__main__":
 
 
     
+    vectors = [
+        [1, 1],
+        [1, 0]
+    ]
+    ortho = gram_schmidt(vectors)
+    print("Orthonormal basis:")
+    for e in ortho:
+        print(e)
+
+
+    A = [[1,2,3],
+        [4,5,6]]
+
+    print("Transpose of A:")
+    for row in transpose(A):
+        print(row)
+
+    print("Identity Matrix (3x3):")
+    for row in identity(3):
+        print(row)
+
+
+    A = [[1, 2],
+         [3, 4]]
+
+    I = identity(2)
+    print("A × I =", matmul(A, I))
+    print("I × A =", matmul(I, A))
+    print("Transpose of A =", transpose(A))
