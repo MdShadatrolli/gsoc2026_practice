@@ -155,6 +155,13 @@ def eigenvector_2x2(M, λ):
     # Solve (A - λI)v = 0
     return [b, λ - a]  # Simplified for 2x2 symmetric case
 
+def varience(M):
+    x=len(M)
+    mean=sum(x for x in M)/x
+    for i in M:
+        pass
+
+        
 
 if __name__== "__main__":
     #DAy 1
@@ -189,7 +196,7 @@ if __name__== "__main__":
     b = [-2.0, 1.0]
     print("dot:", dot(a, b))                       # 0.0
     print("norm a:", norm(a))                     # sqrt(5)
-    print("orthogonal?", are_orthogonal(a, b))    # True
+    print("orthogonal:", are_orthogonal(a, b))    # True
 
     # a float example where dot is near zero
     a2 = [1e-10, 1.0]
@@ -257,3 +264,4 @@ if __name__== "__main__":
 
     print("Eigenvector for λ1:", eigenvector_2x2(A, λ1))
     print("Eigenvector for λ2:", eigenvector_2x2(A, λ2))
+
