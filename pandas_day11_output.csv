@@ -1,0 +1,5 @@
+name,age,city,score,age_plus_5,score_filled
+Alice,25,Delhi,85.0,30,85.0
+Bob,30,Pune,92.5,35,92.5
+Charlie,35,Mumbai,,40,83.83333333333333
+Diana,28,Chandigarh,74.0,33,74.0
